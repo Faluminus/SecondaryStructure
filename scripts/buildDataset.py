@@ -5,7 +5,7 @@ import subprocess
 
 
 #PATHS
-inputFileWIN = 'data/processed/mmCIF'
+inputFileWIN = 'data/raw/mmCIF'
 outputFileWIN = 'data/raw/AMINtoSEC.csv'
 log_dir = 'scripts/logs/'
 
