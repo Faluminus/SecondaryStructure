@@ -101,22 +101,23 @@ def main(to_download):
     currently_downloading = 0
 
 
-    for divided in divided_names:
-        proteins = ProteinPaths(inputFileWIN + divided)
-        for protein in proteins:
-            if to_download[0] >= currently_downloading and to_download[1] <= currently_downloading:
-                logger.info(protein + ':processing')
-                args = subprocess.run(CommandDSSP(inputFileWIN + '/' + divided + '/' + protein),capture_output=True, text=True, shell=True).stdout
-                processed_dssp = ProcessDSSP(args)
-                if processed_dssp != ['','']:
-                    finalDataset = open(outputFileWIN,'a',newline="")
-                    finalDataset.write('\n'+processed_dssp[0]+','+processed_dssp[1])
-                    finalDataset.close()
-            currently_downloading +=1
-            
-
-finalDataset = open(outputFileWIN,'a',newline="")
-finalDataset.write("AminoAcidSeq,SecondaryStructureSeq")
-finalDataset.close()
-
-WorkersRUN(4,main)
+for divided in divided_names:
+    proteins = ProteinPaths(inputFileWIN + divided)
+    for protein in proteins:
+        if 23471 < currently_downloading:
+            print(protein + ':doing_DSSP')
+            args = subprocess.run(CommandDSSP(inputFileWIN + '/' + divided + '/' + protein),capture_output=True, text=True, shell=True).stdout
+            print(protein + ':done_DSSP')
+            print(protein + ':procesing_DSSP')
+            processed_dssp = ProcessDSSP(args)
+            print(protein + ':procesing_done_DSSP')
+            if processed_dssp != ['','']:
+                finalDataset = open(outputFileWIN,'a',newline="")
+                finalDataset.write('\n'+processed_dssp[0]+','+processed_dssp[1])
+                finalDataset.close()
+                logger.info(protein + ':was_processed')
+                print(protein + ':was_processed')
+            else:
+                logger.info(protein + ':wasnt_processed')
+                print(protein + ':wasnt_processed')
+        currently_downloading+=1
