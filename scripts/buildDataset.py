@@ -43,8 +43,8 @@ logger.setLevel(logging.INFO)
 
 def CheckForDownloaded():
     with open(os.path.join(log_dir, "app.log"),'r') as logs:
-        lineNum = len(logs.readlines())
-        return lineNum
+        lineNum = logs.readlines()
+        
         
 
 def ProteinPaths(divided_path):
@@ -69,11 +69,13 @@ def ProcessDSSP(dsspData):
     
     return allData
 
+
 def WorkersRUN(number_of_workers,exec_function):
     download_split = DownloadSplit(number_of_workers)
     pool = multiprocessing.Pool(processes=number_of_workers)
     pool.starmap(exec_function,zip(download_split))
-    
+
+
 
 def DownloadSplit(number_of_workers):
     divided_names = os.listdir(inputFileWIN)
